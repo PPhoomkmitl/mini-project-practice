@@ -1,0 +1,30 @@
+
+  .col {
+    width: 100%;
+    color: #a5a5a5;
+  }
+  .row {
+    /* background-color: rgb(244, 244, 244); */
+    margin: 10px;
+    padding: 0 15px;
+    border-radius: 10px;
+    height: 80px;
+    align-items: center;
+
+  }
+
+  .text-left p {
+    text-align: left;
+    margin-bottom: 0px;
+  }
+
+  .text-mid p {
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
+
+  .text-right p {
+    text-align: right;
+    margin-bottom: 0px;
+  }

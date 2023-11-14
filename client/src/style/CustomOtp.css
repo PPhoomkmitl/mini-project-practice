@@ -1,0 +1,82 @@
+  .custom-font {
+    font-family: 'Prompt', sans-serif;
+  }
+  .two-column-layout {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+  }
+  .centered-content p {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .centered-content h1 {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 700;
+    line-height: 39px;
+    letter-spacing: 0em;
+    text-align: left;
+    font-size: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .centered-content label {
+    font-family: 'Prompt', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .left-column {
+    flex-basis: 45%; /* รักษาขนาดคอลัมน์ซ้าย 45% */
+    /* background-image: linear-gradient(to bottom right, rgba(191, 227, 230, 1), rgba(255, 153, 0, 0.42)); */
+    background-image: url(https://images.inc.com/uploaded_files/image/1920x1080/getty_907650310_409538.jpg);
+    background-size: cover;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    font-family: 'Prompt', sans-serif;
+    
+  }
+  
+  .right-column {
+    margin-top: 210px;
+    flex-basis: 45%; /* รักษาขนาดคอลัมน์ขวา 45% */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff; /* พื้นหลังสีขาว */
+    flex-grow: 1;
+    font-family: 'Prompt', sans-serif;
+  }
+
+  .right-column input[type="email"],
+  .right-column input[type="text"] {
+    font-family: 'Prompt', sans-serif;
+    width: 550px;
+    height: 43px;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .right-column Button {
+    margin-top:5px ;
+    width: 50%;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 1);
+    border: solid rgba(0, 0, 0, 1);
+  }
+  .right-column Button:hover {
+    background:  rgba(234, 234, 234, 0.5); 
+    color: rgb(0, 0, 0);
+    border-color: rgba(234, 234, 234, 0.5);
+  }

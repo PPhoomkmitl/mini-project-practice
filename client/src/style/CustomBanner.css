@@ -1,0 +1,100 @@
+
+@media (max-width: 1000px) {
+  .banner-1-selected {
+    display: none; 
+  }
+  .custom-cards-category-banner {
+    /* font-size: 13px; */
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+  }
+  .custom-cards-category-banner p{
+    font-size: 13px;
+    max-width: 100%;
+    margin-bottom:0px ;
+  }
+  .custom-container-banner-1 p {
+    font-size: 13px; 
+  }
+}
+
+  .custom-container-banner-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 415px; /* กำหนดความสูงให้ container ทั้งหมดเต็มหน้าจอ */
+    border-radius: 20px;
+    background-image: linear-gradient(to right, rgba(191, 227, 230, 1), rgba(234, 228, 216, 0.46), rgba(255, 153, 0, 0.42));
+    width: 99%;
+    margin: 0.625rem;
+  }
+
+  .custom-container-banner-2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 265px; /* กำหนดความสูงให้ container ทั้งหมดเต็มหน้าจอ */
+      max-width: 98%;
+      background-image: linear-gradient(to right, rgba(191, 227, 230, 1), rgba(234, 228, 216, 0.46), rgba(255, 153, 0, 0.42));
+      margin: 0 auto; /* เพิ่มบรรทัดนี้ เพื่อทำให้ div อยู่ตรงกลาง */
+      border-radius: 20px;
+    }
+  
+  .custom-banner {
+    text-align: center;
+    color: #000000;
+    padding: 10px;
+  }
+
+  .custom-cards-category-banner {
+    max-width: 70%;
+    max-height: 31px;
+    height: 100%;
+
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    justify-items: left;
+    font-size: 1.2rem;
+    font-family: Inter;
+    color: white;
+    margin-top: 45px;
+    margin-bottom:1.5vw ;
+    margin-left: 4.5vw;
+    font-family: 'Prompt', sans-serif;
+    font-weight: bold;
+    padding-top: 2px; 
+  }
+  
+
+  .custom-content-2-selected {
+    display: flex ;
+    justify-content:space-between;
+    font-size:1.3rem;
+    margin:auto ;
+    max-width:520px;
+  }
+
+  .custome-container-progressBar{
+    margin: auto;
+    max-width: 530px;
+  }
+
+  .banner-1-selected  {
+      flex: 1;
+      margin:100px;
+  }
+  .banner-1-selected p {
+    margin-bottom: 0;
+}
+  .banner-2-selected {
+    width: 681px;
+    height: 317px;
+    background-color: rgba(13, 12, 34, 1);
+    margin: 100px;
+    border-radius: 20px;
+    max-width: 100%;
+
+  }
+  

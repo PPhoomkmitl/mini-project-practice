@@ -1,0 +1,20 @@
+  /*Part of fileDowload*/
+  .download-button {
+    font-size: 18.5px;
+    margin-top: 25px;
+    background: white;
+    border: 1px solid rgb(49, 130, 237);
+    border-radius: 4px;
+    padding: 2.4px 10.8px;
+    color: rgb(49, 130, 237);
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+    box-shadow: rgb(49, 130, 237) 0px 0px 0px 0.1rem inset;
+  }
+  
+  .download-button:hover {
+    background: rgba(234, 234, 234, 0.5); 
+    color: rgb(49, 130, 237);
+    border-color: rgba(234, 234, 234, 0.5);
+  }
+
+  
