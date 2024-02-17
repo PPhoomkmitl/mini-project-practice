@@ -26,7 +26,7 @@ import { useAuth } from '../context/AuthContext'
 import { io } from 'socket.io-client';
 
 
-const socket = io('http://localhost:8080', {
+const socket = io('http://localhost:5000', {
   reconnection: true,
 });
 
@@ -76,7 +76,7 @@ export default function CategoryPage() {
     const reviewData = async () => {
       try {
         setLoadingData(true); // เริ่มต้นการโหลดข้อมูล
-        const response = await axios.get('http://localhost:8080/review/all-reviews')
+        const response = await axios.get('http://localhost:5000/review/all-reviews')
         if (response.data && response.data.length > 0) {
           setReviews(response.data)
           console.log('Fetch all Review Success')
@@ -96,7 +96,7 @@ export default function CategoryPage() {
     const uploadFileData = async () => {
       try {
         setLoadingData(true); // เริ่มต้นการโหลดข้อมูล
-        const response = await axios.get(`http://localhost:8080/upload/all-files`)
+        const response = await axios.get(`http://localhost:5000/upload/all-files`)
         if (response.data && response.data.length > 0) {
           setUploadFiles(response.data)
           console.log('Fetch all Upload Success')
@@ -122,7 +122,7 @@ export default function CategoryPage() {
     const questionData = async () => {
       try {
         setLoadingData(true); // เริ่มต้นการโหลดข้อมูล
-        const response = await axios.get('http://localhost:8080/question/all-questions');
+        const response = await axios.get('http://localhost:5000/question/all-questions');
         if (response.data && response.data.length > 0) {
           setQuestions(response.data);
           console.log('Fetch all Question Success');
@@ -215,9 +215,7 @@ export default function CategoryPage() {
           }
           </TabPanel>
         </TabContext>
-      </Box>
-
-      
+      </Box>     
     </>
   )
 }

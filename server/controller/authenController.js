@@ -1,15 +1,12 @@
-// const User = require('../model/User')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const config = process.env;
-// const mongoose = require('mongoose');
 const { connect } = require('../config/database');
 const uuid = require('uuid');
 
 /* Libery OTP */
 const speakeasy = require('speakeasy');
-// const Secret = require('../model/Secret');
 
 const deleteExpiredSecret = async (secretId) => {
   const pool = await connect();
@@ -64,7 +61,6 @@ const generateSecret = async (req, res) => {
 };
 
 
-
 const generateOTP = async (req, res) => {
   const pool = await connect();
   const connection = await pool.getConnection();
@@ -75,8 +71,7 @@ const generateOTP = async (req, res) => {
     if(!emailPattern.test(email)){
       return res.status(404).json({ error: 'User Does not from KMITL.' });
     }
-    const [existingUser] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
-    // connection.release()
+    const [existingUser] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);   
 
     if (existingUser && existingUser.length > 0) {
       return res.status(409).json({ error: 'User already exists. Please login.' });
@@ -85,7 +80,6 @@ const generateOTP = async (req, res) => {
     const id = await generateSecret()
     console.log('Sending id:',id)
     const [secret] = await connection.execute('SELECT value FROM secret WHERE id = ?', [id]);
-    // connection.release()   
 
     if (!secret) {
       return res.status(404).json({ error: 'Secret not found' });
@@ -94,7 +88,6 @@ const generateOTP = async (req, res) => {
     // อัปเดต email ในฐานข้อมูล
     await connection.execute('UPDATE secret SET email = ? WHERE id = ?', [email,id]);
     const [getSecret] = await connection.execute('SELECT * FROM secret WHERE id = ?', [id]);
-    // connection.release()
     
     console.log('Sending id :', getSecret[0].id)
     console.log('Sending value :', getSecret[0].value)
@@ -102,7 +95,7 @@ const generateOTP = async (req, res) => {
 
     const otp = speakeasy.totp({
       secret: getSecret[0].value,
-      encoding: 'base32',
+      encoding:'base32',
       digits: 6
     });
 
@@ -130,8 +123,7 @@ const verifyOTP = async (req, res) => {
       return res.status(400).json({ error: 'Invalid request. Missing required parameters.' });
     }
     const [secret] = await connection.execute('SELECT * FROM secret WHERE id = ?', [id]);
-    // connection.release();
-    // const secret = await Secret.findById(id);
+
     console.log('Secret value:', secret)
 
     if (!secret) {
@@ -214,7 +206,6 @@ const createRegister = async (req, res) => {
         return res.status(400).send('All input is required');
       }
       const [existingUser] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
-      // connection.release();
 
       if (existingUser && existingUser.length > 0) {
           return res.status(409).json({ error: 'User already exists. Please login.' });
@@ -222,7 +213,6 @@ const createRegister = async (req, res) => {
           const encryptedPassword = await bcrypt.hash(password, 10);
           const [result] = await pool.query('INSERT INTO users (user_name, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)',
               [user_name, first_name, last_name, email.toLowerCase(), encryptedPassword]);
-          // connection.release()
 
           const newUser = {
               id: result.insertId,
@@ -253,13 +243,9 @@ const createRegister = async (req, res) => {
       if (!(email && password)) {
         return res.status(400).json({ error: 'All input is required' });
       }
-        // const user = await User.findOne({ email });
-        // const pool = await connect();
-        // // ตรวจสอบว่ามีผู้ใช้ที่มีอีเมลเดียวกันอยู่แล้วหรือไม่
-        // const connection = await pool.getConnection();
+
         const [user] = await connection.execute('SELECT * FROM users WHERE email = ?', [email]);
         console.log('get',user[0].user_name)
-        // connection.release();
 
         if (user && await bcrypt.compare(password, user[0].password)) {
             const accessToken = jwt.sign(

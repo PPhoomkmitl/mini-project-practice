@@ -1,8 +1,3 @@
-// const Review = require('../model/Review')
-// const User = require('../model/User')
-// const Rating = require('../model/Rating')
-// const mongoose = require('mongoose')
-
 const { connect } = require('../config/database');
 const { calculateAverage } = require('../service/calculateAverageRating')
 
@@ -16,7 +11,7 @@ const getAllReviews = async (req, res) => {
       INNER JOIN users ON review.user_id = users.id
       ORDER BY review.created_at DESC
     `);
-    // connection.release()
+  
     res.status(200).json(review);
 
   } catch (error) {
@@ -33,21 +28,14 @@ const createReview = async (req, res) => {
   try {
     const { content, category } = req.body
     const userId = req.user.user_id
-
-        // const user = await User.findById(userId)
+  
     const [user] = await connection.execute('SELECT * FROM users WHERE id = ?', [userId]);
-        // connection.release();
+
     if (!user || user.length === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-        // const newReview = {
-        //     content,
-        //     timeStamp: new Date(),
-        //     user: new mongoose.Types.ObjectId(user._id),
-        //     category,
-        // };
-        // const createdReview = await Review.create(newReview)
+
     const [createdReview] = await connection.execute(`
       INSERT INTO review (content, category, created_at, user_id)
       VALUES (?, ?, ?, ?)
@@ -56,17 +44,14 @@ const createReview = async (req, res) => {
         // connection.release()
     console.log('Review created with ID:', createdReview.insertId);
 
-        // const review = await Review.findById(createdReview._id).populate('user')
-        // const [review] = await connection.execute(
-        //   'SELECT review.*, users.user_name FROM review INNER JOIN users ON review.user_id = users.id WHERE review.id = ?',
-        //   [createdReview]
-        // );
+
 
     const [review] = await connection.execute('SELECT review.*, users.user_name FROM review INNER JOIN users ON review.user_id = users.id WHERE review.id = ?', 
     [createdReview.insertId]);
-        // connection.release()
+      
     console.log(review)
-        // Current time
+
+    // Current time
     if (review) {
       const timeStamp = new Date(review.created_at)
       const currentDate = new Date()
@@ -114,6 +99,7 @@ const createRating = async (req, res) => {
   try {
     const { group1 ,group2 ,group3 , date, category, user } = req.body;
     console.log(group1 ,group2 ,group3 , user )
+
     // ตรวจสอบว่า user.id ไม่เป็น undefined หรือ null ก่อนที่จะทำ query
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -121,7 +107,7 @@ const createRating = async (req, res) => {
 
     // ทำการ query หา user จาก id ที่รับมาจาก req.body
     const [userIdResult] = await connection.execute('SELECT id FROM users WHERE id = ?', [user]);
-    // connection.release();
+    
 
     console.log(userIdResult)
     console.log(userIdResult[0].id)
@@ -136,7 +122,6 @@ const createRating = async (req, res) => {
       'INSERT INTO rating (group1 ,group2 ,group3, created_at , category ,user_id) VALUES (?, ?, ?, NOW(), ?, ?)',
       [group1 ,group2 ,group3, category, userIdResult[0].id]
     );
-    // connection.release();
 
     res.status(200).json("Success created rating");
   } catch (error) {
@@ -164,10 +149,7 @@ const getRatingCategoryMonthly = async (req, res) => {
       'SELECT * FROM rating WHERE category = ? AND created_at BETWEEN ? AND ?',
       [categoryName, firstDayOfMonth, lastDayOfMonth]
     );
-    // const [ratings] = await connection.execute(
-    //   'SELECT group1, group2, group3, created_at FROM rating WHERE category = ? AND created_at BETWEEN ? AND ?',
-    //   [categoryName, firstDayOfMonth, lastDayOfMonth]
-    // );
+
     console.log(ratings)
     if (ratings.length === 0) {
       const defaultRatings = { group1: 5, group2: 5, group3: 5 }; // ถ้าไม่พบข้อมูลในช่วงเวลาที่ระบุ ให้ให้ค่าเรตติ้งทั้งสามกลุ่มเป็น 5

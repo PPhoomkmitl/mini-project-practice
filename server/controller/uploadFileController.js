@@ -24,7 +24,6 @@ const uploadFile = async (req, res) => {
     const allowedExtensions = ['.pdf'];
     let fileExtension = file.originalname.slice(((file.originalname.lastIndexOf(".") - 1) >>> 0) + 2);
 
-    // เพิ่มจุดถ้าไม่มี
     fileExtension = fileExtension ? '.' + fileExtension : '';
 
     if (!allowedExtensions.includes(fileExtension.toLowerCase())) {
@@ -38,7 +37,7 @@ const uploadFile = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const filePath = path.join('C:\\Users\\Phoom1645\\OneDrive\\เอกสาร\\MyProject\\server\\uploads', file.filename);
+    const filePath = path.resolve(__dirname, '..', 'uploads' , file.filename); 
     console.log("fliePath :",filePath )
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: 'File not found' });
@@ -77,9 +76,6 @@ const uploadFile = async (req, res) => {
         users u ON f.user_id = u.id
       WHERE
         f.id = ?;`, [createFile.insertId]);
-
-    
-    // const downloadLink = `${process.env.BASE_URL}/${fileWithUser.file_id}`; // Adjust the URL structure as needed
     connection.release();
     res.status(200).json(files[0]);
   } catch (error) {
@@ -149,25 +145,6 @@ const downloadFile = async (req, res) => {
     res.status(500).json({ message: 'Error downloading file' });
   }
 };
-
-
-// const downloadFile = async (req, res) => {
-//   console.log("Hello Check")
-//   const { filename } = req.params;
-//   console.log("fileName",filename)
-//   const decodedFilename = decodeURIComponent(filename);
-//   console.log(decodedFilename)
-//   const filePath = path.join('C:\\Users\\Phoom1645\\OneDrive\\เอกสาร\\MyProject\\server\\uploads', decodedFilename);
-//   console.log("filePath",filePath)
-//   res.download(filePath, (err) => {
-//     if (err) {
-//       console.error('Error downloading file:', err);
-//       res.status(500).json({ message: 'Error downloading file' });
-//     } else {
-//       console.log('File downloaded successfully');
-//     }
-//   });
-// };
 
 module.exports = {
   uploadFile,

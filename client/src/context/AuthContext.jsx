@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
       if(accessToken === null && refreshToken === null){
         throw(error)
       }
-      const response = await axios.get('http://localhost:8080/auth/check-login' , 
+      const response = await axios.get('http://localhost:5000/auth/check-login' , 
       {
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('access_token');
         await refreshTokens()
         const newAccessToken = localStorage.getItem('access_token');
-        const response = await axios.get('http://localhost:8080/auth/check-login' , {
+        const response = await axios.get('http://localhost:5000/auth/check-login' , {
         headers: {
             Authorization: `Bearer ${newAccessToken}`,
         },
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   const refreshTokens = async () => {
     try {
       console.log(localStorage.getItem('refresh_token'))
-      const response = await axios.post('http://localhost:8080/auth/refresh',  
+      const response = await axios.post('http://localhost:5000/auth/refresh',  
       {
         headers: {
           'Authorization': `Bearer ${refreshToken}`

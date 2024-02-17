@@ -23,7 +23,7 @@ import '../style/CustomTabs.css'
 import { Spinner } from 'react-bootstrap'
 
 /* Client Socket */
-const socket = io('http://localhost:8080', {
+const socket = io('http://localhost:5000', {
   reconnection: true,
 });
 
@@ -63,7 +63,7 @@ export default function Home() {
     const reviewData = async () => {
       try {
           setLoadingData(true);
-          const response = await axios.get('http://localhost:8080/review/all-reviews')
+          const response = await axios.get('http://localhost:5000/review/all-reviews')
           if (response.data && response.data.length > 0) {
             setReviews(response.data)
             console.log('Fetch all Review Success')
@@ -81,7 +81,7 @@ export default function Home() {
     const uploadFileData = async () => {
       try {
           setLoadingData(true); 
-          const response = await axios.get(`http://localhost:8080/upload/all-files`)
+          const response = await axios.get(`http://localhost:5000/upload/all-files`)
           console.log(' Upload ',response.data)
           if (response.data && response.data.length > 0) {
             setUploadFiles(response.data)
@@ -107,7 +107,7 @@ export default function Home() {
     const questionData = async () => {
       try {
         setLoadingData(true); 
-        const response = await axios.get('http://localhost:8080/question/all-questions');
+        const response = await axios.get('http://localhost:5000/question/all-questions');
         if (response.data && response.data.length > 0) {
           setQuestions(response.data);
           console.log('Fetch all Question Success');
@@ -160,13 +160,6 @@ export default function Home() {
                 <p>ไม่ค้นพบข้อมูลรีวิว</p>
               </div>
             )}
-            {/* { reviews.length > 0 ?  <PaginationPage articles={reviews} type={"review"} /> 
-              :
-              <div style={{textAlign:'center' , marginBottom:'197px'}}>
-                <SearchOffIcon fontSize="large"/>
-                <p>ไม่ค้นพบข้อมูลรีวิว</p>
-              </div>
-            }                  */}
           </TabPanel>
           <TabPanel value="2" >           
             {isLogin ? <QuestionForm socket={socket} count={questions.length}/> : <hr className='line-lower-tab'/>}
@@ -205,8 +198,6 @@ export default function Home() {
         </TabContext>   
       </Box>      
     </div> 
-
-  
   )
 }
 

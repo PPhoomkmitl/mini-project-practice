@@ -1,7 +1,3 @@
-// const Question = require('../model/Question')
-// const User = require('../model/User')
-// const mongoose = require('mongoose')
-
 const { connect } = require('../config/database');
 const createQuestion = async (req, res) => {
     const pool = await connect();
@@ -10,10 +6,9 @@ const createQuestion = async (req, res) => {
         const { contentResult, categoryResult } = req.body;
         console.log(contentResult, categoryResult)
         const userId = req.user.user_id;
-        // console.log("Time Check",new Date())
-        // const user = await User.findById(userId);
+
         const [user] = await connection.execute('SELECT id FROM users WHERE id = ?', [userId]);
-        // connection.release();
+        
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -45,7 +40,7 @@ const createQuestion = async (req, res) => {
         };
 
         console.log("question",question)
-        // connection.release();
+
 
         if (question) {
           const timeStamp = question.created_at;
@@ -76,7 +71,6 @@ const createQuestion = async (req, res) => {
           };
 
           console.log(updatedQuestion )
-          // connection.release();
           res.status(201).json(updatedQuestion);
         } else {
           res.status(404).json({ error: 'Question not found' });
@@ -149,7 +143,7 @@ const getAllQuestions = async (req, res) => {
     });
 
     const formattedQuestions = Array.from(questionMap.values());
-    // connection.release();
+
     res.status(200).json(formattedQuestions);
 
   } catch (error) {
@@ -175,7 +169,6 @@ const updateLikeQuestionById  = async (req, res) => {
         await ReportLike.findByIdAndUpdate(questionId, {$set: { likes: true }})
       }
       //total like and dislike
-      // const {likes , dislikes} = calculateLikesAndDislikes(questionId)
       res.json('Success like')
     } catch (error) {
       console.error('Error liking question:', error);
@@ -187,6 +180,7 @@ const updateLikeQuestionById  = async (req, res) => {
 const updateDislikeQuestionById = async (req, res) => {
     try {
       const questionId = req.params.questionId;
+
       // อัปเดตค่า dislikes ของคำถาม
       await Question.findByIdAndUpdate(questionId, { $inc: { dislikes: 1 } });
       res.status(200).json({ message: 'Disliked successfully.' });
@@ -200,15 +194,10 @@ const updateDislikeQuestionById = async (req, res) => {
 const createComment = async (req, res) => {
   const pool = await connect();
   const connection = await pool.getConnection();
-  // const formattedTimeStamp = indochinaTime.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+  
   try {
     const { content , userId , user_name ,questionID  } = req.body
-    //update
-    // const questionComment = await Question.findByIdAndUpdate(req.params.id , {
-    //   $push : { comments: {content : content , userId : userId , userNameComment : userNameComment ,questionID : questionID , timeStamp : timeStamp}}
-    // },
-    //   { new: true }
-    // )
+
     console.log("QID",questionID)
     const [commentResults] = await connection.execute(
       'INSERT INTO comment (content, created_at, user_id, user_name, question_id) VALUES (?, CONVERT_TZ(NOW(), \'+00:00\', \'+07:00\'), ?, ?, ?)',
@@ -223,11 +212,7 @@ const createComment = async (req, res) => {
     );
 
     const newComment = newCommentResults[0];
-    // const updatedQuestion = await connectionPool.execute(
-    //   'SELECT * FROM questions WHERE id = ?',
-    //   [questionID]
-    // );
-    // connection.release();
+
     console.log("UPDATE Question");
     res.status(200).json(newComment)
   } catch (error) {

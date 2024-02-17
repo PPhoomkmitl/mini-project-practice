@@ -8,7 +8,7 @@ import axios from 'axios'
 import getTimeSincePosted from './getTimeSincePosted'
 import '../style/CustomCards.css'
 
-const socket = io('http://localhost:8080', {
+const socket = io('http://localhost:5000', {
   reconnection: true,
 });
 
@@ -25,7 +25,7 @@ function QuestionDetail({ question }) {
   useEffect(() => {
     const categoryColor = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/category/ColorCategoryByName/${question.category}`);
+        const response = await axios.get(`http://localhost:5000/category/ColorCategoryByName/${question.category}`);
         setColorCode(response.data);
       } catch (error) {
         console.error('Error fetch Category:', error);

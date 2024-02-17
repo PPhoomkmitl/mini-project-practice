@@ -9,7 +9,7 @@ function ProgressBarScreen({ id }) {
     useEffect(() => {
         const ratingData = async () => {
           try {
-              const response = await axios.get(`http://localhost:8080/review/get-rating/${id}`)
+              const response = await axios.get(`http://localhost:5000/review/get-rating/${id}`)
               setRating(response.data)
               console.log('Fetch all Rating Success')
               console.log(response.data)

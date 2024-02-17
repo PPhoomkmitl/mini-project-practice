@@ -17,7 +17,7 @@ function QuestionForm({ socket , defaultCategory , count }) {
     useEffect(() => {
         const categoryData = async() => {
             try {
-                const response = await axios.get('http://localhost:8080/category/allCategory')
+                const response = await axios.get('http://localhost:5000/category/allCategory')
                 setCategory(Array.isArray(response.data) ? response.data : []);
                 console.log("Successful fetch Category", response.data);
             } catch (error) {
@@ -66,7 +66,7 @@ function QuestionForm({ socket , defaultCategory , count }) {
         console.log(newQuestion)
             try {
                 const response = await axios.post(
-                    'http://localhost:8080/question/create-question',
+                    'http://localhost:5000/question/create-question',
                     newQuestion,
                     {
                         headers: {
@@ -84,7 +84,7 @@ function QuestionForm({ socket , defaultCategory , count }) {
                     const newAccessToken = localStorage.getItem('access_token')
                     try {
                         const response = await axios.post(
-                            'http://localhost:8080/question/create-question',
+                            'http://localhost:5000/question/create-question',
                             newQuestion,
                             {
                                 headers: {

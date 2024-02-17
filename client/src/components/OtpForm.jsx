@@ -21,7 +21,7 @@ const OtpForm = ({ type }) => {
   const handleEmailSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`http://localhost:8080/auth/generateOTP`, { email });
+      const response = await axios.post(`http://localhost:5000/auth/generateOTP`, { email });
       console.log('Status',response.status)
       console.log('data',response.data)
       console.log('data2',response.data.id)
@@ -64,7 +64,7 @@ const OtpForm = ({ type }) => {
     const id = localStorage.getItem('secret_token')
     try {
       const response = await axios.post(
-        `http://localhost:8080/auth/verifyOTP`,
+        `http://localhost:5000/auth/verifyOTP`,
         { id , token},
       )
       console.log('VerifyOTP :',response.data)

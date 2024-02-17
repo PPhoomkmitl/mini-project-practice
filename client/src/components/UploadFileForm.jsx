@@ -17,7 +17,7 @@ function UploadFileForm({ socket , defaultCategory , count}) {
   useEffect(() => {
     const categoryData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/category/allCategory');
+        const response = await axios.get('http://localhost:5000/category/allCategory');
         setCategory(Array.isArray(response.data) ? response.data : []);
         console.log("Successful fetch Category", response.data.code);
       } catch (error) {
@@ -70,7 +70,7 @@ function UploadFileForm({ socket , defaultCategory , count}) {
        // Log FormData contents for debugging
 
       // console.log('FormData:', formData);
-      const response = await axios.post('http://localhost:8080/upload/uploadFile', formData, {
+      const response = await axios.post('http://localhost:5000/upload/uploadFile', formData, {
       headers: {
         Authorization: `Bearer ${itemToken}`,
         'Content-Type': 'multipart/form-data',
@@ -95,7 +95,7 @@ function UploadFileForm({ socket , defaultCategory , count}) {
         formData.append('category', selectedCategory)
         formData.append('user', user.id)
         try {
-          const response = await axios.post('http://localhost:8080/upload/uploadFile', formData, {
+          const response = await axios.post('http://localhost:5000/upload/uploadFile', formData, {
             headers: {
               Authorization: `Bearer ${newAccessToken}`,
               'Content-Type': 'multipart/form-data',

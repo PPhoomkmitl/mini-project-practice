@@ -21,7 +21,7 @@ function navbar() {
   useEffect(() => {
     const categoryData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/category/allCategory');
+        const response = await axios.get('http://localhost:5000/category/allCategory');
         setCategory(Array.isArray(response.data) ? response.data : []);
         // console.log("Successful fetch Category", response.data.code);
       } catch (error) {

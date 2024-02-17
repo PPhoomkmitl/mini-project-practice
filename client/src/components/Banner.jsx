@@ -11,7 +11,7 @@ function Banner({id}) {
     const categoryColor = async() => {
 
       try {
-        const response = await axios.get(`http://localhost:8080/category/ColorCategoryByName/${id}` )
+        const response = await axios.get(`http://localhost:5000/category/ColorCategoryByName/${id}` )
         setColorCode(response.data)
       } catch (error) {
         console.warn('warning fetch Category:', error)
@@ -62,16 +62,4 @@ export default Banner
 
 
 
-{/* <div>
-<div className='custom-banner'>
-    <h1>CS Inslight</h1>
-    <p>แชร์ความรู้และประสบการณ์ในการเรียนรู้วิชาคอมพิวเตอร์</p>
-        <div className='custom-cards-category-banner' style={{backgroundColor:`${colorCode}`}}>{id}</div>
-        <div style={{display:'flex' , justifyContent:'space-between' , fontSize:'1.3rem', margin:'auto'}}>
-          <p style={{color:'white'}}>คะแนนภาพรวม</p>
-          <p style={{color:'white'}}>ไม่พอใจ</p>
-          <p style={{color:'white'}}>พอใจ</p>
-        </div>    
-        {id ? <ProgressBarScreen id={id}/> : null}
-</div> 
-</div>  */}
+

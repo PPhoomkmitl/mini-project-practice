@@ -22,7 +22,7 @@ const AuthForm = ({ type , email}) => {
     e.preventDefault()
     console.log(formData)
     try {
-      const response = await axios.post(`http://localhost:8080/auth/${type.toLowerCase()}`, formData );
+      const response = await axios.post(`http://localhost:5000/auth/${type.toLowerCase()}`, formData );
       if(response !== null){
         const { user, accessToken, refreshToken } = response.data
         setUser(user)
@@ -86,12 +86,7 @@ const AuthForm = ({ type , email}) => {
 
                       if (regex.test(password)) {
                         setFormData({ ...formData, password });
-                        setPasswordValid(true)
-                        // {
-                        //   <Form.Text className="text-success">
-                        //   <CheckCircleOutlineIcon/>รหัสครบ6ตัวอักษร
-                        //   </Form.Text> 
-                        // }
+                        setPasswordValid(true)                 
                       
                       } else {
                         setPasswordValid(false)
@@ -145,35 +140,3 @@ const AuthForm = ({ type , email}) => {
 
 export default AuthForm
 
- {/* <Form>
-            <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-              <Form.Label column sm="2">
-                Email
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control type="email" placeholder="Email" onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-              <Form.Label column sm="2">
-                Password
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control type="password" placeholder="Password" onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>
-              </Col>
-            </Form.Group>
-           </Form> */}
-
-          {/* <input
-            type="email"
-            placeholder="email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-          <input
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          /> */}

@@ -50,7 +50,7 @@ function ReviewForm({ socket , defaultCategory , count}) {
         }
 
         console.log("NewRAting >>",newRating)
-        const response =  await axios.post('http://localhost:8080/review/create-rating', newRating)
+        const response =  await axios.post('http://localhost:5000/review/create-rating', newRating)
         console.log(response.data);
         console.log(scores)
         if(defaultCategory === null || defaultCategory === undefined){
@@ -64,7 +64,7 @@ function ReviewForm({ socket , defaultCategory , count}) {
     useEffect(() => {
         const categoryData = async() => {
         try {
-            const response = await axios.get('http://localhost:8080/category/allCategory')
+            const response = await axios.get('http://localhost:5000/category/allCategory')
             setCategory(Array.isArray(response.data) ? response.data : []);
             console.log("Successful fetch Category", response.data.code);
         } catch (error) {
@@ -115,7 +115,7 @@ function ReviewForm({ socket , defaultCategory , count}) {
         console.log("Create Review",newReview)
         try {
             const response = await axios.post(
-                'http://localhost:8080/review/create-review',
+                'http://localhost:5000/review/create-review',
                 newReview,
                 {
                     headers: {
@@ -134,7 +134,7 @@ function ReviewForm({ socket , defaultCategory , count}) {
                 const newAccessToken = localStorage.getItem('access_token')
                 try {
                     const response = await axios.post(
-                        'http://localhost:8080/review/create-review',
+                        'http://localhost:5000/review/create-review',
                         newReview,
                         {
                             headers: {

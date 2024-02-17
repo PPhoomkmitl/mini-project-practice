@@ -12,7 +12,7 @@ const UploadFileDetail = ({uploadFile}) => {
   useEffect(() => {
     const categoryColor = async() => {
       try {
-        const response = await axios.get(`http://localhost:8080/category/ColorCategoryByName/${uploadFile.category}` )
+        const response = await axios.get(`http://localhost:5000/category/ColorCategoryByName/${uploadFile.category}` )
         setColorCode(response.data)
       } catch (error) {
         console.error('Error fetch Category:', error)
@@ -31,7 +31,7 @@ const UploadFileDetail = ({uploadFile}) => {
       // const filename = encodeURIComponent(uploadFile.file_name);
       // console.log("filename >> ",filename)
       const filename = encodeURIComponent(uploadFile.file_name);
-      const response = await axios.get(`http://localhost:8080/upload/downloadFile/${encodeURIComponent(filename)}`, {
+      const response = await axios.get(`http://localhost:5000/upload/downloadFile/${encodeURIComponent(filename)}`, {
         responseType: 'blob',
       });
       console.log(response.data)
@@ -95,20 +95,6 @@ export default UploadFileDetail
 
 
 
-{/* <Button className="download-button" onClick={handleDownload}>
-ดาวน์โหลด
-</Button>  */}
- {/* <button 
-                      className="download-button"
-                      onClick={() => {                     
-                          const link = document.createElement('a');
-                          link.href = `data:application/pdf;base64,${base64String}`;
-                          link.download = 'ไฟล์สรุป.pdf';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);                                     
-                      }}>                
-                      ดาวน์โหลด
-                    </button>   */}
+
 
 

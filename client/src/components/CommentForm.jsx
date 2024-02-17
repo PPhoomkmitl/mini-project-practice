@@ -33,7 +33,7 @@ function CommentForm({ question, socket }) {
     
       try {
         const response = await axios.post(
-          `http://localhost:8080/question/createComment/${question.id}`,
+          `http://localhost:5000/question/createComment/${question.id}`,
           newComment,
           {
             headers: {
@@ -51,7 +51,7 @@ function CommentForm({ question, socket }) {
           const newAccessToken = localStorage.getItem('access_token');
           try {
             const response = await axios.put(
-              `http://localhost:8080/question/createComment/${question.id}`,
+              `http://localhost:5000/question/createComment/${question.id}`,
               newComment,
               {
                 headers: {

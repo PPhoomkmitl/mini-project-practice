@@ -13,7 +13,7 @@ function ReviewDetail({ review }) {
   useEffect(() => {
     const categoryColor = async() => {
       try {
-        const response = await axios.get(`http://localhost:8080/category/ColorCategoryByName/${review.category}` )
+        const response = await axios.get(`http://localhost:5000/category/ColorCategoryByName/${review.category}` )
         setColorCode(response.data)
       } catch (error) {
         console.error('Error fetch Category:', error)
